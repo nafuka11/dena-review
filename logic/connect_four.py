@@ -30,3 +30,8 @@ class ConnectFour:
         if self.board.is_connected(Point(x, y)):
             return True
         return False
+
+    def is_valid_x(self, x: int) -> bool:
+        if 0 <= x < self.board.size.x:
+            return True
+        return False
