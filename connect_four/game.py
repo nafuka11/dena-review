@@ -18,3 +18,15 @@ class ConnectFour:
         if self.board.can_put_cell(Point(x, 0)):
             return True
         return False
+
+    def is_connected(self, x: int) -> bool:
+        y = min(
+            [
+                y
+                for y in reversed(range(self.board.size.y))
+                if not self.board.can_put_cell(Point(x, y))
+            ]
+        )
+        if self.board.is_connected(Point(x, y)):
+            return True
+        return False
