@@ -1,5 +1,5 @@
-from connect_four.cell import CellState
-from connect_four.point import Point
+from logic.cell import CellState
+from logic.point import Point
 
 
 class Board:
