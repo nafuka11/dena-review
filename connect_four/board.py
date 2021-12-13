@@ -3,8 +3,9 @@ from connect_four.point import Point
 
 
 class Board:
-    def __init__(self, size: Point) -> None:
+    def __init__(self, size: Point, connect_length: int) -> None:
         self.size = size
+        self.connect_length = connect_length
         self.init_cells()
 
     def init_cells(self) -> None:
