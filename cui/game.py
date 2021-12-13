@@ -22,8 +22,8 @@ class Game:
     def _process_user_input(self) -> int:
         display_turn_info(self.is_player_turn)
         while True:
+            display_input_message(0, self.connect_four.board.size.x - 1)
             try:
-                display_input_message(0, self.connect_four.board.size.x - 1)
                 x = int(input())
                 if self.connect_four.is_valid_x(x):
                     return x
