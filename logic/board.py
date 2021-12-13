@@ -40,10 +40,10 @@ class Board:
         return self._is_connected_line(pos, Point(1, 0))
 
     def _is_connected_right_diagonal(self, pos: Point) -> bool:
-        return self._is_connected_line(pos, Point(1, -1))
+        return self._is_connected_line(pos, Point(-1, 1))
 
     def _is_connected_left_diagonal(self, pos: Point) -> bool:
-        return self._is_connected_line(pos, Point(-1, 1))
+        return self._is_connected_line(pos, Point(1, 1))
 
     def _is_connected_line(self, pos: Point, delta: Point) -> bool:
         count = 1

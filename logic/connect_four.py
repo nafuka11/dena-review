@@ -20,13 +20,14 @@ class ConnectFour:
         return False
 
     def is_connected(self, x: int) -> bool:
-        y = min(
-            [
-                y
-                for y in reversed(range(self.board.size.y))
-                if not self.board.can_put_cell(Point(x, y))
-            ]
-        )
+        filled_y = [
+            y
+            for y in reversed(range(self.board.size.y))
+            if not self.board.can_put_cell(Point(x, y))
+        ]
+        if not filled_y:
+            return False
+        y = min(filled_y)
         if self.board.is_connected(Point(x, y)):
             return True
         return False
