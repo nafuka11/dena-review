@@ -1,7 +1,7 @@
-from connect_four import const
-from connect_four.board import Board
-from connect_four.cell import CellState
-from connect_four.point import Point
+from logic import const
+from logic.board import Board
+from logic.cell import CellState
+from logic.point import Point
 
 
 class ConnectFour:
@@ -28,5 +28,10 @@ class ConnectFour:
             ]
         )
         if self.board.is_connected(Point(x, y)):
+            return True
+        return False
+
+    def is_valid_x(self, x: int) -> bool:
+        if 0 <= x < self.board.size.x:
             return True
         return False

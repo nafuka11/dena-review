@@ -1,3 +1,6 @@
+game:
+	python main.py
+
 lint:
 	black --check .
 	flake8 .
