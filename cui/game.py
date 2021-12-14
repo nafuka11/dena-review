@@ -1,5 +1,6 @@
 from cui.display import (
     display_board,
+    display_draw_message,
     display_input_message,
     display_turn_info,
     display_winner_message,
@@ -21,6 +22,7 @@ class Game:
                 break
             if self.connect_four.judge_draw():
                 display_board(self.connect_four.board)
+                display_draw_message()
                 break
             self.is_player_turn = not self.is_player_turn
 

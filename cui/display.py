@@ -44,6 +44,11 @@ def display_winner_message(is_player_turn: bool) -> None:
     print(f"{PLAYER_NAME[is_player_turn]} wins!")
 
 
+def display_draw_message() -> None:
+    print()
+    print("Draw!")
+
+
 def _clear_screen() -> None:
     print(ESC_CLEAR_SCREEN)
 
