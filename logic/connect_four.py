@@ -15,6 +15,8 @@ class ConnectFour:
         self.board.put_cell(x, CellState.OPPONENT)
 
     def can_put_cell(self, x: int) -> bool:
+        if not self._is_valid_range_x(x):
+            return False
         if self.board.can_put_cell(Point(x, 0)):
             return True
         return False
