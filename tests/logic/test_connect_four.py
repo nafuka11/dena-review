@@ -238,3 +238,28 @@ class TestConnectFour:
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
         assert not connect_four.judge_win(x)
 
+    def test_judge_draw_true(self) -> None:
+        connect_four = ConnectFour()
+        board_str = [
+            "OOOXOOO",
+            "XXXOXXX",
+            "OOOXOOO",
+            "XXXOXXX",
+            "OOOXOOO",
+            "XXXOXXX",
+        ]
+        connect_four.board.cells = self.generate_cells_from_lines(board_str)
+        assert connect_four.judge_draw()
+
+    def test_judge_draw_false(self) -> None:
+        connect_four = ConnectFour()
+        board_str = [
+            "OOOXOO.",
+            "XXXOXXX",
+            "OOOXOOO",
+            "XXXOXXX",
+            "OOOXOOO",
+            "XXXOXXX",
+        ]
+        connect_four.board.cells = self.generate_cells_from_lines(board_str)
+        assert not connect_four.judge_draw()
