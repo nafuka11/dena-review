@@ -35,8 +35,7 @@ class Game:
                 pass
 
     def _put_cell(self, x: int) -> None:
-        if self.connect_four.can_put_cell(x):
-            if self.is_player_turn:
-                self.connect_four.put_player_cell(x)
-            else:
-                self.connect_four.put_opponent_cell(x)
+        if self.is_player_turn:
+            self.connect_four.put_player_cell(x)
+        else:
+            self.connect_four.put_opponent_cell(x)
