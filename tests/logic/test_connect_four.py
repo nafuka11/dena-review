@@ -94,7 +94,7 @@ class TestConnectFour:
             (6, False),
         ],
     )
-    def test_is_connected_horizontal(self, x: int, expected: bool) -> None:
+    def test_judge_win_horizontal(self, x: int, expected: bool) -> None:
         connect_four = ConnectFour()
         board_str = [
             ".......",
@@ -105,7 +105,7 @@ class TestConnectFour:
             "OOOO...",
         ]
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
-        assert connect_four.is_connected(x) == expected
+        assert connect_four.judge_win(x) == expected
 
     @pytest.mark.parametrize(
         "x, expected",
@@ -119,7 +119,7 @@ class TestConnectFour:
             (6, False),
         ],
     )
-    def test_is_connected_vertical(self, x: int, expected: bool) -> None:
+    def test_judge_win_vertical(self, x: int, expected: bool) -> None:
         connect_four = ConnectFour()
         board_str = [
             ".......",
@@ -130,7 +130,7 @@ class TestConnectFour:
             "O......",
         ]
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
-        assert connect_four.is_connected(x) == expected
+        assert connect_four.judge_win(x) == expected
 
     @pytest.mark.parametrize(
         "x, expected",
@@ -144,7 +144,7 @@ class TestConnectFour:
             (6, False),
         ],
     )
-    def test_is_connected_right_diagonal(self, x: int, expected: bool) -> None:
+    def test_judge_win_right_diagonal(self, x: int, expected: bool) -> None:
         connect_four = ConnectFour()
         board_str = [
             ".......",
@@ -155,7 +155,7 @@ class TestConnectFour:
             "O......",
         ]
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
-        assert connect_four.is_connected(x) == expected
+        assert connect_four.judge_win(x) == expected
 
     @pytest.mark.parametrize(
         "x, expected",
@@ -169,7 +169,7 @@ class TestConnectFour:
             (6, True),
         ],
     )
-    def test_is_connected_left_diagonal(self, x: int, expected: bool) -> None:
+    def test_judge_win_left_diagonal(self, x: int, expected: bool) -> None:
         connect_four = ConnectFour()
         board_str = [
             ".......",
@@ -180,10 +180,10 @@ class TestConnectFour:
             "......O",
         ]
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
-        assert connect_four.is_connected(x) == expected
+        assert connect_four.judge_win(x) == expected
 
     @pytest.mark.parametrize("x", [0, 1, 2, 3, 4, 5, 6])
-    def test_is_connected_false_horizontal(self, x: int) -> None:
+    def test_judge_win_false_horizontal(self, x: int) -> None:
         connect_four = ConnectFour()
         board_str = [
             ".......",
@@ -194,10 +194,10 @@ class TestConnectFour:
             "XXX....",
         ]
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
-        assert not connect_four.is_connected(x)
+        assert not connect_four.judge_win(x)
 
     @pytest.mark.parametrize("x", [0, 1, 2, 3, 4, 5, 6])
-    def test_is_connected_false_vertical(self, x: int) -> None:
+    def test_judge_win_false_vertical(self, x: int) -> None:
         connect_four = ConnectFour()
         board_str = [
             ".......",
@@ -208,10 +208,10 @@ class TestConnectFour:
             "X......",
         ]
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
-        assert not connect_four.is_connected(x)
+        assert not connect_four.judge_win(x)
 
     @pytest.mark.parametrize("x", [0, 1, 2, 3, 4, 5, 6])
-    def test_is_connected_false_right_diagonal(self, x: int) -> None:
+    def test_judge_win_false_right_diagonal(self, x: int) -> None:
         connect_four = ConnectFour()
         board_str = [
             ".......",
@@ -222,10 +222,10 @@ class TestConnectFour:
             "X......",
         ]
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
-        assert not connect_four.is_connected(x)
+        assert not connect_four.judge_win(x)
 
     @pytest.mark.parametrize("x", [0, 1, 2, 3, 4, 5, 6])
-    def test_is_connected_false_left_diagonal(self, x: int) -> None:
+    def test_judge_win_false_left_diagonal(self, x: int) -> None:
         connect_four = ConnectFour()
         board_str = [
             ".......",
@@ -236,4 +236,5 @@ class TestConnectFour:
             "......X",
         ]
         connect_four.board.cells = self.generate_cells_from_lines(board_str)
-        assert not connect_four.is_connected(x)
+        assert not connect_four.judge_win(x)
+
