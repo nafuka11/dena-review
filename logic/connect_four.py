@@ -23,7 +23,7 @@ class ConnectFour:
             return True
         return False
 
-    def is_connected(self, x: int) -> bool:
+    def judge_win(self, x: int) -> bool:
         filled_y = self._get_filled_y(x)
         if not filled_y:
             return False

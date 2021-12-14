@@ -16,7 +16,7 @@ class Game:
     def run(self) -> None:
         while True:
             x = self._process_turn()
-            if self.connect_four.is_connected(x):
+            if self.connect_four.judge_win(x):
                 display_board(self.connect_four.board)
                 display_winner_message(self.is_player_turn)
                 break
