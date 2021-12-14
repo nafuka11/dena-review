@@ -29,8 +29,8 @@ class Game:
             display_input_message(0, self.connect_four.board.size.x - 1)
             try:
                 x = int(input())
-                if self.connect_four.is_valid_x(x):
-                    return x
+                if self.connect_four.can_put_cell(x - 1):
+                    return x - 1
             except ValueError:
                 pass
 
