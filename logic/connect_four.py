@@ -1,3 +1,5 @@
+from typing import List
+
 from logic import const
 from logic.board import Board
 from logic.cell import CellState
@@ -30,7 +32,7 @@ class ConnectFour:
             return True
         return False
 
-    def _get_filled_y(self, x) -> int:
+    def _get_filled_y(self, x: int) -> List[int]:
         filled_y = [
             y
             for y in reversed(range(self.board.size.y))

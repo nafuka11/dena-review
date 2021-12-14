@@ -52,15 +52,18 @@ class TestConnectFour:
         connect_four = ConnectFour()
         assert connect_four.can_put_cell(x)
 
-    @pytest.mark.parametrize("x, expected", [
-        (0, False),
-        (1, True),
-        (2, True),
-        (3, True),
-        (4, True),
-        (5, True),
-        (6, True),
-    ])
+    @pytest.mark.parametrize(
+        "x, expected",
+        [
+            (0, False),
+            (1, True),
+            (2, True),
+            (3, True),
+            (4, True),
+            (5, True),
+            (6, True),
+        ],
+    )
     def test_can_put_cell_filled_row(self, x: int, expected: bool) -> None:
         connect_four = ConnectFour()
         board_str = [

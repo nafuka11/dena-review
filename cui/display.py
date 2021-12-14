@@ -43,8 +43,10 @@ def display_winner_message(is_player_turn: bool) -> None:
     print()
     print(f"{PLAYER_NAME[is_player_turn]} wins!")
 
+
 def _clear_screen() -> None:
     print(ESC_CLEAR_SCREEN)
+
 
 def _clear_line() -> None:
     print(f"{ESC_CURSOR_UP}{ESC_CLEAR_LINE}", end="")
