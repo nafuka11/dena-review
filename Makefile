@@ -2,14 +2,14 @@ game:
 	python main.py
 
 test:
-	python -m pytest
+	poetry run python -m pytest
 
 lint:
-	black --check .
-	flake8 .
-	mypy .
-	isort --diff .
+	poetry run black --check .
+	poetry run flake8 .
+	poetry run mypy .
+	poetry run isort --diff .
 
 format:
-	black .
-	isort .
+	poetry run black .
+	poetry run isort .

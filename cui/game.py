@@ -1,5 +1,9 @@
-from cui.display import (display_board, display_input_message, display_turn_info,
-                         display_winner_message)
+from cui.display import (
+    display_board,
+    display_input_message,
+    display_turn_info,
+    display_winner_message,
+)
 from logic.connect_four import ConnectFour
 
 
