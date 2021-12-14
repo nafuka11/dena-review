@@ -1,3 +1,5 @@
+from typing import List
+
 from logic import const
 from logic.board import Board
 from logic.cell import CellState
@@ -15,16 +17,14 @@ class ConnectFour:
         self.board.put_cell(x, CellState.OPPONENT)
 
     def can_put_cell(self, x: int) -> bool:
+        if not self._is_valid_range_x(x):
+            return False
         if self.board.can_put_cell(Point(x, 0)):
             return True
         return False
 
     def is_connected(self, x: int) -> bool:
-        filled_y = [
-            y
-            for y in reversed(range(self.board.size.y))
-            if not self.board.can_put_cell(Point(x, y))
-        ]
+        filled_y = self._get_filled_y(x)
         if not filled_y:
             return False
         y = min(filled_y)
@@ -32,7 +32,15 @@ class ConnectFour:
             return True
         return False
 
-    def is_valid_x(self, x: int) -> bool:
+    def _get_filled_y(self, x: int) -> List[int]:
+        filled_y = [
+            y
+            for y in reversed(range(self.board.size.y))
+            if not self.board.can_put_cell(Point(x, y))
+        ]
+        return filled_y
+
+    def _is_valid_range_x(self, x: int) -> bool:
         if 0 <= x < self.board.size.x:
             return True
         return False
