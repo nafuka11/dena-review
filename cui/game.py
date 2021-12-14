@@ -14,17 +14,22 @@ class Game:
 
     def run(self) -> None:
         while True:
-            display_board(self.connect_four.board)
-            x = self._process_user_input()
-            self._put_cell(x)
+            x = self._process_turn()
             if self.connect_four.is_connected(x):
                 display_board(self.connect_four.board)
                 display_winner_message(self.is_player_turn)
                 break
             self.is_player_turn = not self.is_player_turn
 
-    def _process_user_input(self) -> int:
+    def _process_turn(self) -> int:
+        display_board(self.connect_four.board)
         display_turn_info(self.is_player_turn)
+        x = self._process_user_input()
+        self._put_cell(x)
+        return x
+
+    def _process_user_input(self) -> int:
+        print()
         while True:
             display_input_message(0, self.connect_four.board.size.x - 1)
             try:
