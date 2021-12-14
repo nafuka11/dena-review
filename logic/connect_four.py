@@ -23,7 +23,7 @@ class ConnectFour:
             return True
         return False
 
-    def is_connected(self, x: int) -> bool:
+    def judge_win(self, x: int) -> bool:
         filled_y = self._get_filled_y(x)
         if not filled_y:
             return False
@@ -31,6 +31,11 @@ class ConnectFour:
         if self.board.is_connected(Point(x, y)):
             return True
         return False
+
+    def judge_draw(self) -> bool:
+        if self.board.has_any_empty_cell():
+            return False
+        return True
 
     def _get_filled_y(self, x: int) -> List[int]:
         filled_y = [
