@@ -33,6 +33,15 @@ class Board:
             return True
         return False
 
+    def has_any_empty_cell(self) -> bool:
+        for y in range(self.size.y):
+            can_put_cell = any(
+                [self.can_put_cell(Point(x, y)) for x in range(self.size.x)]
+            )
+            if can_put_cell:
+                return True
+        return False
+
     def _is_connected_vertical(self, pos: Point) -> bool:
         return self._is_connected_line(pos, Point(0, 1))
 
