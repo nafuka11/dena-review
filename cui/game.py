@@ -31,7 +31,7 @@ class Game:
     def _process_user_input(self) -> int:
         print()
         while True:
-            display_input_message(0, self.connect_four.board.size.x - 1)
+            display_input_message(1, self.connect_four.board.size.x)
             try:
                 x = int(input())
                 if self.connect_four.can_put_cell(x - 1):
