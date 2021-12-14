@@ -19,6 +19,9 @@ class Game:
                 display_board(self.connect_four.board)
                 display_winner_message(self.is_player_turn)
                 break
+            if self.connect_four.judge_draw():
+                display_board(self.connect_four.board)
+                break
             self.is_player_turn = not self.is_player_turn
 
     def _process_turn(self) -> int:

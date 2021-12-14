@@ -32,6 +32,11 @@ class ConnectFour:
             return True
         return False
 
+    def judge_draw(self) -> bool:
+        if self.board.has_any_empty_cell():
+            return False
+        return True
+
     def _get_filled_y(self, x: int) -> List[int]:
         filled_y = [
             y
