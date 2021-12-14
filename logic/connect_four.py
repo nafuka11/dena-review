@@ -34,7 +34,8 @@ class ConnectFour:
             return True
         return False
 
-    def is_valid_x(self, x: int) -> bool:
+
+    def _is_valid_range_x(self, x: int) -> bool:
         if 0 <= x < self.board.size.x:
             return True
         return False
