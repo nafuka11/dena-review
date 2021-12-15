@@ -8,6 +8,7 @@ from logic.point import Point
 
 class ConnectFour:
     def __init__(self) -> None:
+        self.size = const.BOARD_SIZE
         self.board = Board(const.BOARD_SIZE, const.CONNECT_LENGTH)
 
     def put_player_cell(self, x: int) -> None:
