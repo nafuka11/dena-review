@@ -11,11 +11,11 @@ class ConnectFour:
         self.size = const.BOARD_SIZE
         self.board = Board(const.BOARD_SIZE, const.CONNECT_LENGTH)
 
-    def put_player_cell(self, x: int) -> None:
-        self.board.put_cell(x, CellState.PLAYER)
+    def put_player_cell(self, x: int) -> Point:
+        return self.board.put_cell(x, CellState.PLAYER)
 
-    def put_opponent_cell(self, x: int) -> None:
-        self.board.put_cell(x, CellState.OPPONENT)
+    def put_opponent_cell(self, x: int) -> Point:
+        return self.board.put_cell(x, CellState.OPPONENT)
 
     def can_put_cell(self, x: int) -> bool:
         if not self._is_valid_range_x(x):
