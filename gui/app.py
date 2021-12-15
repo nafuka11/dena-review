@@ -79,10 +79,10 @@ class Application(ttk.Frame):
 
     def put_cell(self, x: int) -> None:
         if self.is_player_turn:
-            self.game.put_player_cell(x)
+            pos = self.game.put_player_cell(x)
         else:
-            self.game.put_opponent_cell(x)
-        self.board.draw_cells(self.game)
+            pos = self.game.put_opponent_cell(x)
+        self.board.draw_cell(pos, self.game, False)
         self.judge_win_or_draw(x)
         self.proceed_next_turn()
 
@@ -157,13 +157,14 @@ class BoardFrame(ttk.Frame):
         need_create = len(self.canvas.find_withtag(self.TAG_CELL)) == 0
         for y in range(game.size.y):
             for x in range(game.size.x):
-                self._draw_cell(Point(x, y), game.get_cell(x, y), need_create)
+                self.draw_cell(Point(x, y), game, need_create)
 
-    def _draw_cell(self, pos: Point, cell: CellState, need_create: bool) -> None:
+    def draw_cell(self, pos: Point, game: ConnectFour, need_create: bool) -> None:
         start_x = CELL_SIZE.x * pos.x + PADDING_SIZE.x
         start_y = CELL_SIZE.y * pos.y + PADDING_SIZE.y
         end_x = CELL_SIZE.x * (pos.x + 1) - PADDING_SIZE.x
         end_y = CELL_SIZE.y * (pos.y + 1) - PADDING_SIZE.y
+        cell = game.get_cell(pos.x, pos.y)
         if need_create:
             self.canvas.create_oval(
                 start_x,
