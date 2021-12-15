@@ -1,5 +1,8 @@
-game: ## Play GUI game
+gui: ## Play GUI game
 	python main.py --gui
+
+cui: ## Play CUI game
+	python main.py --cui
 
 test: ## Test with pytest
 	poetry run python -m pytest
