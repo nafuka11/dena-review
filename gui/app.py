@@ -84,7 +84,8 @@ class Application(ttk.Frame):
             pos = self.game.put_opponent_cell(x)
         self.board.draw_cell(pos, self.game, False)
         self.judge_win_or_draw(x)
-        self.proceed_next_turn()
+        if not self.game_end:
+            self.proceed_next_turn()
 
     def judge_win_or_draw(self, x: int) -> None:
         if self.game.judge_win(x):
