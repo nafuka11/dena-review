@@ -3,7 +3,7 @@ import tkinter as tk
 from gui.app import WINDOW_SIZE, Application
 
 
-class Game:
+class GUIGame:
     def run(self) -> None:
         root = tk.Tk()
         root.minsize(width=WINDOW_SIZE.x, height=WINDOW_SIZE.y)
