@@ -82,6 +82,22 @@ class TestConnectFour:
         connect_four = ConnectFour()
         assert not connect_four.can_put_cell(x)
 
+    def test_get_cell(self) -> None:
+        connect_four = ConnectFour()
+        board_str = [
+            "OX.....",
+            "X......",
+            ".......",
+            ".......",
+            ".......",
+            ".......",
+        ]
+        connect_four.board.cells = self.generate_cells_from_lines(board_str)
+        assert connect_four.get_cell(0, 0) == CellState.PLAYER
+        assert connect_four.get_cell(0, 1) == CellState.OPPONENT
+        assert connect_four.get_cell(1, 0) == CellState.OPPONENT
+        assert connect_four.get_cell(1, 1) == CellState.EMPTY
+
     @pytest.mark.parametrize(
         "x, expected",
         [

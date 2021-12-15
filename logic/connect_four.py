@@ -24,6 +24,9 @@ class ConnectFour:
             return True
         return False
 
+    def get_cell(self, x: int, y: int) -> CellState:
+        return self.board.cells[y][x]
+
     def judge_win(self, x: int) -> bool:
         filled_y = self._get_filled_y(x)
         if not filled_y:
