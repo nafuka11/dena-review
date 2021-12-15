@@ -27,7 +27,7 @@ class TestConnectFour:
 
     def test_put_player_cell(self) -> None:
         connect_four = ConnectFour()
-        connect_four.put_player_cell(0)
+        pos = connect_four.put_player_cell(0)
         board_str = [
             ".......",
             ".......",
@@ -37,11 +37,12 @@ class TestConnectFour:
             "O......",
         ]
         expected = self.generate_cells_from_lines(board_str)
+        assert pos.x == 0 and pos.y == 5
         assert connect_four.board.cells == expected
 
     def test_put_opponent_cell(self) -> None:
         connect_four = ConnectFour()
-        connect_four.put_opponent_cell(0)
+        pos = connect_four.put_opponent_cell(0)
         board_str = [
             ".......",
             ".......",
@@ -51,6 +52,7 @@ class TestConnectFour:
             "X......",
         ]
         expected = self.generate_cells_from_lines(board_str)
+        assert pos.x == 0 and pos.y == 5
         assert connect_four.board.cells == expected
 
     @pytest.mark.parametrize("x", [0, 1, 2, 3, 4, 5, 6])
