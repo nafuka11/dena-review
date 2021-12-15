@@ -8,7 +8,7 @@ from cui.display import (
 from logic.connect_four import ConnectFour
 
 
-class Game:
+class CUIGame:
     def __init__(self) -> None:
         self.connect_four = ConnectFour()
         self.is_player_turn = True

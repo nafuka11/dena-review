@@ -11,11 +11,12 @@ class Board:
     def init_cells(self) -> None:
         self.cells = [[CellState.EMPTY] * self.size.x for _ in range(self.size.y)]
 
-    def put_cell(self, x: int, cell: CellState) -> None:
+    def put_cell(self, x: int, cell: CellState) -> Point:
         for y in reversed(range(self.size.y)):
             if self.can_put_cell(Point(x, y)):
                 self.cells[y][x] = cell
-                return
+                return Point(x, y)
+        return Point(-1, -1)
 
     def can_put_cell(self, pos: Point) -> bool:
         if self.cells[pos.y][pos.x] == CellState.EMPTY:
