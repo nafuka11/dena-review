@@ -1,18 +1,23 @@
+.PHONY: gui
 gui: ## Play GUI game
 	python main.py --gui
 
+.PHONY: cui
 cui: ## Play CUI game
 	python main.py --cui
 
+.PHONY: test
 test: ## Test with pytest
 	poetry run python -m pytest
 
+.PHONY: lint
 lint: ## Lint with black, flake8, mypy and isort
 	poetry run black --check .
 	poetry run flake8 .
 	poetry run mypy .
 	poetry run isort --diff .
 
+.PHONY: format
 format: ## Format with black and isort
 	poetry run black .
 	poetry run isort .
