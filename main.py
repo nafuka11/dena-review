@@ -16,9 +16,7 @@ def parse_args() -> Namespace:
     parser = ArgumentParser()
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-c", "--cui", action="store_true", help="play CUI game")
-    group.add_argument(
-        "-g", "--gui", action="store_true", help="play GUI game", default=True
-    )
+    group.add_argument("-g", "--gui", action="store_true", help="play GUI game")
     return parser.parse_args()
 
 
