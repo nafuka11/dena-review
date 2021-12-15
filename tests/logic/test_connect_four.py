@@ -2,6 +2,7 @@ from typing import List
 
 import pytest
 
+from logic import const
 from logic.cell import CellState
 from logic.connect_four import ConnectFour
 
@@ -18,6 +19,11 @@ class TestConnectFour:
         for line in lines:
             cells.append([self.CELL_CHARACTER[cell] for cell in line])
         return cells
+
+    def test_init(self) -> None:
+        connect_four = ConnectFour()
+        assert connect_four.size.x == const.BOARD_SIZE.x
+        assert connect_four.size.y == const.BOARD_SIZE.y
 
     def test_put_player_cell(self) -> None:
         connect_four = ConnectFour()
