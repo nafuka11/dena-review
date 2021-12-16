@@ -2,6 +2,26 @@
 
 ![CI status](https://github.com/nafuka11/dena-review/actions/workflows/python-app.yml/badge.svg)
 
+目次
+
+- [概要](#概要)
+- [必要物](#必要物)
+- [使い方](#使い方)
+  - [リポジトリのclone](#リポジトリのclone)
+  - [GUIゲームのプレイ](#guiゲームのプレイ)
+  - [CUIゲームのプレイ](#cuiゲームのプレイ)
+- [開発者向け情報](#開発者向け情報)
+  - [必要物](#必要物-1)
+  - [ディレクトリ構成](#ディレクトリ構成)
+  - [開発用各種コマンド](#開発用各種コマンド)
+    - [Test](#test)
+    - [Lint](#lint)
+    - [Format](#format)
+  - [CI](#ci)
+  - [UML図](#uml図)
+    - [クラス図](#クラス図)
+    - [パッケージ図](#パッケージ図)
+
 ## 概要
 
 Python製の四目並べ（Connect four）ゲームです。
