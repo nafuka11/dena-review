@@ -21,6 +21,7 @@
   - [UML図](#uml図)
     - [クラス図](#クラス図)
     - [パッケージ図](#パッケージ図)
+- [ライセンス](#ライセンス)
 
 ## 概要
 
@@ -161,3 +162,7 @@ GitHub Actionsを使い、以下のイベントが発生した場合、testとli
 #### パッケージ図
 
 ![Packages](docs/packages.png)
+
+## ライセンス
+
+[MIT License](LICENSE) です。
