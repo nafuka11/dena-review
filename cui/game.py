@@ -17,17 +17,17 @@ class CUIGame:
         while True:
             x = self._process_turn()
             if self.game.judge_win(x):
-                display_board(self.game.board)
+                display_board(self.game)
                 display_winner_message(self.is_player_turn)
                 break
             if self.game.judge_draw():
-                display_board(self.game.board)
+                display_board(self.game)
                 display_draw_message()
                 break
             self.is_player_turn = not self.is_player_turn
 
     def _process_turn(self) -> int:
-        display_board(self.game.board)
+        display_board(self.game)
         display_turn_info(self.is_player_turn)
         x = self._process_user_input()
         self._put_cell(x)
@@ -36,7 +36,7 @@ class CUIGame:
     def _process_user_input(self) -> int:
         print()
         while True:
-            display_input_message(1, self.game.board.size.x)
+            display_input_message(1, self.game.size.x)
             try:
                 x = int(input())
                 if self.game.can_put_cell(x - 1):

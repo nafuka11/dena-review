@@ -10,19 +10,19 @@ ESC_CURSOR_UP = "\033[1A"
 ESC_CLEAR_LINE = "\033[2K"
 
 
-def display_board(board: Board) -> None:
+def display_board(game: ConnectFour) -> None:
     _clear_screen()
-    print("+" + "-" * (board.size.x * 2 - 1) + "+")
-    for y in range(board.size.y):
+    print("+" + "-" * (game.size.x * 2 - 1) + "+")
+    for y in range(game.size.y):
         print("|", end="")
         print(
-            " ".join([CELL_CHARACTER[board.cells[y][x]] for x in range(board.size.x)]),
+            " ".join([CELL_CHARACTER[game.get_cell(x, y)] for x in range(game.size.x)]),
             end="",
         )
         print("|", end="")
         print()
-    print("+" + "-" * (board.size.x * 2 - 1) + "+")
-    print(" " + " ".join([str(x) for x in range(1, board.size.x + 1)]))
+    print("+" + "-" * (game.size.x * 2 - 1) + "+")
+    print(" " + " ".join([str(x) for x in range(1, game.size.x + 1)]))
 
 
 def display_turn_info(is_player_turn: bool) -> None:
