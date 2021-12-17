@@ -4,6 +4,7 @@ from tkinter import ttk
 from logic import CellState, ConnectFour, Point
 
 CELL_SIZE = Point(40, 40)
+CELL_PADDING_SIZE = Point(5, 5)
 HEADER_HEIGHT = 20
 FOOTER_HEIGHT = 40
 WINDOW_SIZE = Point(
@@ -156,10 +157,10 @@ class BoardFrame(ttk.Frame):
                 self.draw_cell(Point(x, y), game, need_create)
 
     def draw_cell(self, pos: Point, game: ConnectFour, need_create: bool) -> None:
-        start_x = CELL_SIZE.x * pos.x + PADDING_SIZE.x
-        start_y = CELL_SIZE.y * pos.y + PADDING_SIZE.y
-        end_x = CELL_SIZE.x * (pos.x + 1) - PADDING_SIZE.x
-        end_y = CELL_SIZE.y * (pos.y + 1) - PADDING_SIZE.y
+        start_x = CELL_SIZE.x * pos.x + CELL_PADDING_SIZE.x
+        start_y = CELL_SIZE.y * pos.y + CELL_PADDING_SIZE.y
+        end_x = CELL_SIZE.x * (pos.x + 1) - CELL_PADDING_SIZE.x
+        end_y = CELL_SIZE.y * (pos.y + 1) - CELL_PADDING_SIZE.y
         cell = game.get_cell(pos.x, pos.y)
         if need_create:
             self.canvas.create_oval(
