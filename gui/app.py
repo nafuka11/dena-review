@@ -7,19 +7,36 @@ CELL_SIZE = Point(40, 40)
 CELL_PADDING_SIZE = Point(5, 5)
 HEADER_HEIGHT = 20
 FOOTER_HEIGHT = 40
-WINDOW_SIZE = Point(
-    CELL_SIZE.x * BOARD_SIZE.x,
-    CELL_SIZE.y * BOARD_SIZE.y + HEADER_HEIGHT + FOOTER_HEIGHT,
-)
-PADDING_SIZE = Point(5, 5)
 
 
-class Application(ttk.Frame):
+class Application(tk.Tk):
+    def __init__(self) -> None:
+        super().__init__()
+        self.create_widgets()
+
+    def create_widgets(self) -> None:
+        game = ConnectFour()
+        window_size = Point(
+            CELL_SIZE.x * game.size.x,
+            CELL_SIZE.y * game.size.y + HEADER_HEIGHT + FOOTER_HEIGHT,
+        )
+        self.minsize(width=window_size.x, height=window_size.y)
+        self.maxsize(width=window_size.x, height=window_size.y)
+
+        self.title("Connect four")
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
+
+        self.container = ContainerFrame(self, window_size, game)
+
+
+class ContainerFrame(ttk.Frame):
     PLAYER_NAME = {True: "Red", False: "Yellow"}
 
-    def __init__(self, master: tk.Tk) -> None:
+    def __init__(self, master: tk.Tk, window_size: Point, game: ConnectFour) -> None:
         super().__init__(master)
-        self.master = master
+        self.window_size = window_size
+        self.game = game
         self.init_game()
         self.create_widgets()
 
@@ -44,8 +61,9 @@ class Application(ttk.Frame):
         self.create_reset_button()
 
     def create_header(self) -> None:
+        size = Point(self.window_size.x, HEADER_HEIGHT)
         self.header = HeaderFrame(
-            self, self.turn, self.PLAYER_NAME[self.is_player_turn]
+            self, size, self.turn, self.PLAYER_NAME[self.is_player_turn]
         )
         self.header.grid(row=0)
         self.columnconfigure(0, weight=1)
@@ -100,11 +118,13 @@ class Application(ttk.Frame):
 
 
 class HeaderFrame(ttk.Frame):
-    def __init__(self, master: Application, turn: int, player: str) -> None:
-        super().__init__(master, width=WINDOW_SIZE.x, height=HEADER_HEIGHT)
-        self.create_widgets(turn, player)
+    def __init__(
+        self, master: ContainerFrame, size: Point, turn: int, player: str
+    ) -> None:
+        super().__init__(master, width=size.x, height=size.y)
+        self._create_widgets(turn, player)
 
-    def create_widgets(self, turn: int, player: str) -> None:
+    def _create_widgets(self, turn: int, player: str) -> None:
         self.turn_label = ttk.Label(self)
         self.turn_label.place(relx=0.2, rely=0)
 
@@ -131,7 +151,7 @@ class BoardFrame(ttk.Frame):
     COLOR_MESSAGE = "#FFFFFF"
     FONT_MESSAGE = ("", 42, "bold")
 
-    def __init__(self, master: Application, game: ConnectFour) -> None:
+    def __init__(self, master: ContainerFrame, game: ConnectFour) -> None:
         super().__init__(master)
         self._create_widgets(game)
 
