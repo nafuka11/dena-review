@@ -101,7 +101,6 @@ class Application(ttk.Frame):
 class HeaderFrame(ttk.Frame):
     def __init__(self, master: Application, turn: int, player: str) -> None:
         super().__init__(master, width=WINDOW_SIZE.x, height=HEADER_HEIGHT)
-        self.master = master
         self.create_widgets(turn, player)
 
     def create_widgets(self, turn: int, player: str) -> None:
@@ -133,7 +132,6 @@ class BoardFrame(ttk.Frame):
 
     def __init__(self, master: Application, game: ConnectFour) -> None:
         super().__init__(master)
-        self.master = master
         self._create_widgets(game)
 
     def _create_widgets(self, game: ConnectFour) -> None:
