@@ -1,27 +1,8 @@
 @startuml classes
 set namespaceSeparator none
 class "Application" as gui.app.Application #antiquewhite {
-  PLAYER_NAME : dict
-  board: BoardFrame
-  game: ConnectFour
-  game_end : bool
-  header: HeaderFrame
-  is_player_turn : bool
-  master : Tk
-  reset_button : Button
-  turn : int
-  create_board()
-  create_header()
-  create_reset_button()
+  container: ContainerFrame
   create_widgets()
-  handle_click_event(event)
-  init_game()
-  judge_win_or_draw(x: int)
-  proceed_next_turn()
-  put_cell(x: int)
-  redraw_board()
-  redraw_header()
-  reset_game()
 }
 class "Board" as logic.board.Board #aquamarine {
   cells: List[List[CellState]]
@@ -41,7 +22,6 @@ class "BoardFrame" as gui.app.BoardFrame #antiquewhite {
   TAG_CELL : str
   TAG_MESSAGE : str
   canvas : Canvas
-  master: Application
   display_draw_message()
   display_win_message(winner: str)
   draw_cell(pos: Point, game: ConnectFour, need_create: bool)
@@ -49,7 +29,7 @@ class "BoardFrame" as gui.app.BoardFrame #antiquewhite {
   redraw_widgets(game: ConnectFour)
 }
 class "CUIGame" as cui.game.CUIGame #aliceblue {
-  connect_four: ConnectFour
+  game: ConnectFour
   is_player_turn : bool
   run()
 }
@@ -60,36 +40,61 @@ enum "CellState" as logic.cell.CellState #aquamarine {
 }
 class "ConnectFour" as logic.connect_four.ConnectFour #aquamarine {
   board: Board
+  connect_length : int
   size: Point
   can_put_cell(x: int) -> bool
   get_cell(x: int, y: int) -> CellState
+  init_board()
   judge_draw() -> bool
   judge_win(x: int) -> bool
   put_opponent_cell(x: int) -> Point
   put_player_cell(x: int) -> Point
 }
+class "ContainerFrame" as gui.app.ContainerFrame #antiquewhite {
+  PLAYER_NAME : dict
+  board: BoardFrame
+  game: ConnectFour
+  game_end : bool
+  header: HeaderFrame
+  is_player_turn : bool
+  reset_button : Button
+  turn : int
+  window_size: Point
+  create_board()
+  create_header()
+  create_reset_button()
+  create_widgets()
+  handle_click_event(event)
+  init_game()
+  judge_win_or_draw(x: int)
+  proceed_next_turn()
+  put_cell(x: int)
+  redraw_board()
+  redraw_header()
+  reset_game()
+  reset_game_board()
+}
 class "GUIGame" as gui.game.GUIGame #antiquewhite {
   run()
 }
 class "HeaderFrame" as gui.app.HeaderFrame #antiquewhite {
-  master: Application
   player_label : Label
   turn_label : Label
-  create_widgets(turn: int, player: str)
   update_widgets(turn: int, player: str)
 }
 class "Point" as logic.point.Point #aquamarine {
   x : int
   y : int
 }
-gui.app.Application --* gui.app.BoardFrame : master
-gui.app.Application --* gui.app.HeaderFrame : master
-gui.app.BoardFrame --* gui.app.Application : board
-gui.app.HeaderFrame --* gui.app.Application : header
+gui.app.Application --- gui.game.GUIGame
+gui.app.BoardFrame --* gui.app.ContainerFrame : board
+gui.app.ContainerFrame --* gui.app.Application : container
+gui.app.HeaderFrame --* gui.app.ContainerFrame : header
 logic.board.Board --* logic.connect_four.ConnectFour : board
 logic.cell.CellState --* logic.board.Board: cells
-logic.connect_four.ConnectFour --* cui.game.CUIGame : connect_four
-logic.connect_four.ConnectFour --* gui.app.Application : game
+logic.connect_four.ConnectFour --* cui.game.CUIGame : game
+logic.connect_four.ConnectFour --* gui.app.ContainerFrame : game
+logic.point.Point --* gui.app.ContainerFrame : window_size
 logic.point.Point --* logic.board.Board : size
 logic.point.Point --* logic.connect_four.ConnectFour : size
 @enduml

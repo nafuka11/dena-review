@@ -1,27 +1,42 @@
 import tkinter as tk
 from tkinter import ttk
 
-from logic.cell import CellState
-from logic.connect_four import ConnectFour
-from logic.const import BOARD_SIZE
-from logic.point import Point
+from logic import CellState, ConnectFour, Point
 
 CELL_SIZE = Point(40, 40)
+CELL_PADDING_SIZE = Point(5, 5)
 HEADER_HEIGHT = 20
 FOOTER_HEIGHT = 40
-WINDOW_SIZE = Point(
-    CELL_SIZE.x * BOARD_SIZE.x,
-    CELL_SIZE.y * BOARD_SIZE.y + HEADER_HEIGHT + FOOTER_HEIGHT,
-)
-PADDING_SIZE = Point(5, 5)
 
 
-class Application(ttk.Frame):
+class Application(tk.Tk):
+    def __init__(self) -> None:
+        super().__init__()
+        self.create_widgets()
+
+    def create_widgets(self) -> None:
+        game = ConnectFour()
+        window_size = Point(
+            CELL_SIZE.x * game.size.x,
+            CELL_SIZE.y * game.size.y + HEADER_HEIGHT + FOOTER_HEIGHT,
+        )
+        self.minsize(width=window_size.x, height=window_size.y)
+        self.maxsize(width=window_size.x, height=window_size.y)
+
+        self.title("Connect four")
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
+
+        self.container = ContainerFrame(self, window_size, game)
+
+
+class ContainerFrame(ttk.Frame):
     PLAYER_NAME = {True: "Red", False: "Yellow"}
 
-    def __init__(self, master: tk.Tk) -> None:
+    def __init__(self, master: tk.Tk, window_size: Point, game: ConnectFour) -> None:
         super().__init__(master)
-        self.master = master
+        self.window_size = window_size
+        self.game = game
         self.init_game()
         self.create_widgets()
 
@@ -29,25 +44,27 @@ class Application(ttk.Frame):
         self.game_end = False
         self.is_player_turn = True
         self.turn = 1
-        self.game = ConnectFour()
 
     def reset_game(self) -> None:
         self.init_game()
+        self.reset_game_board()
         self.redraw_header()
         self.redraw_board()
         self.master.update()
 
+    def reset_game_board(self) -> None:
+        self.game.init_board()
+
     def create_widgets(self) -> None:
-        self.master.columnconfigure(0, weight=1)
-        self.master.rowconfigure(0, weight=1)
         self.grid(column=0, row=0, sticky=tk.N + tk.S + tk.W + tk.E)
         self.create_header()
         self.create_board()
         self.create_reset_button()
 
     def create_header(self) -> None:
+        size = Point(self.window_size.x, HEADER_HEIGHT)
         self.header = HeaderFrame(
-            self, self.turn, self.PLAYER_NAME[self.is_player_turn]
+            self, size, self.turn, self.PLAYER_NAME[self.is_player_turn]
         )
         self.header.grid(row=0)
         self.columnconfigure(0, weight=1)
@@ -102,12 +119,13 @@ class Application(ttk.Frame):
 
 
 class HeaderFrame(ttk.Frame):
-    def __init__(self, master: Application, turn: int, player: str) -> None:
-        super().__init__(master, width=WINDOW_SIZE.x, height=HEADER_HEIGHT)
-        self.master = master
-        self.create_widgets(turn, player)
+    def __init__(
+        self, master: ContainerFrame, size: Point, turn: int, player: str
+    ) -> None:
+        super().__init__(master, width=size.x, height=size.y)
+        self._create_widgets(turn, player)
 
-    def create_widgets(self, turn: int, player: str) -> None:
+    def _create_widgets(self, turn: int, player: str) -> None:
         self.turn_label = ttk.Label(self)
         self.turn_label.place(relx=0.2, rely=0)
 
@@ -134,9 +152,8 @@ class BoardFrame(ttk.Frame):
     COLOR_MESSAGE = "#FFFFFF"
     FONT_MESSAGE = ("", 42, "bold")
 
-    def __init__(self, master: Application, game: ConnectFour) -> None:
+    def __init__(self, master: ContainerFrame, game: ConnectFour) -> None:
         super().__init__(master)
-        self.master = master
         self._create_widgets(game)
 
     def _create_widgets(self, game: ConnectFour) -> None:
@@ -161,10 +178,10 @@ class BoardFrame(ttk.Frame):
                 self.draw_cell(Point(x, y), game, need_create)
 
     def draw_cell(self, pos: Point, game: ConnectFour, need_create: bool) -> None:
-        start_x = CELL_SIZE.x * pos.x + PADDING_SIZE.x
-        start_y = CELL_SIZE.y * pos.y + PADDING_SIZE.y
-        end_x = CELL_SIZE.x * (pos.x + 1) - PADDING_SIZE.x
-        end_y = CELL_SIZE.y * (pos.y + 1) - PADDING_SIZE.y
+        start_x = CELL_SIZE.x * pos.x + CELL_PADDING_SIZE.x
+        start_y = CELL_SIZE.y * pos.y + CELL_PADDING_SIZE.y
+        end_x = CELL_SIZE.x * (pos.x + 1) - CELL_PADDING_SIZE.x
+        end_y = CELL_SIZE.y * (pos.y + 1) - CELL_PADDING_SIZE.y
         cell = game.get_cell(pos.x, pos.y)
         if need_create:
             self.canvas.create_oval(

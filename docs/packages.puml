@@ -1,12 +1,18 @@
 @startuml packages
 set namespaceSeparator none
+package "cui" as cui #aliceblue {
+}
 package "cui.display" as cui.display #aliceblue {
 }
 package "cui.game" as cui.game #aliceblue {
 }
+package "gui" as gui #antiquewhite {
+}
 package "gui.app" as gui.app #antiquewhite {
 }
 package "gui.game" as gui.game #antiquewhite {
+}
+package "logic" as logic #aquamarine {
 }
 package "logic.board" as logic.board #aquamarine {
 }
@@ -20,22 +26,23 @@ package "logic.point" as logic.point #aquamarine {
 }
 package "main" as main #burlywood {
 }
-cui.display --> logic.board
-cui.display --> logic.cell
+cui --> cui.game
+cui.display --> logic
 cui.game --> cui.display
-cui.game --> logic.connect_four
-gui.app --> logic.cell
-gui.app --> logic.connect_four
-gui.app --> logic.const
-gui.app --> logic.point
+cui.game --> logic
+gui --> gui.game
+gui.app --> logic
 gui.game --> gui.app
+logic --> logic.cell
+logic --> logic.connect_four
+logic --> logic.point
 logic.board --> logic.cell
 logic.board --> logic.point
-logic.connect_four --> logic.const
 logic.connect_four --> logic.board
 logic.connect_four --> logic.cell
+logic.connect_four --> logic.const
 logic.connect_four --> logic.point
 logic.const --> logic.point
-main --> cui.game
-main --> gui.game
+main --> cui
+main --> gui
 @enduml

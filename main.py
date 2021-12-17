@@ -1,7 +1,7 @@
 from argparse import ArgumentParser, Namespace
 
-from cui.game import CUIGame
-from gui.game import GUIGame
+from cui import CUIGame
+from gui import GUIGame
 
 
 def main() -> None:

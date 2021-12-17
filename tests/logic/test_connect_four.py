@@ -2,9 +2,7 @@ from typing import List
 
 import pytest
 
-from logic import const
-from logic.cell import CellState
-from logic.connect_four import ConnectFour
+from logic import CellState, ConnectFour, Point, const
 
 
 class TestConnectFour:
@@ -24,6 +22,29 @@ class TestConnectFour:
         connect_four = ConnectFour()
         assert connect_four.size.x == const.BOARD_SIZE.x
         assert connect_four.size.y == const.BOARD_SIZE.y
+
+    def test_init_with_argument(self) -> None:
+        size = Point(21, 42)
+        connect_length = 7
+        connect_four = ConnectFour(size=size, connect_length=connect_length)
+        assert connect_four.size == size
+        assert connect_four.connect_length == connect_length
+
+    def test_init_board(self) -> None:
+        connect_four = ConnectFour()
+        board_str = [
+            "OOOXOOO",
+            "XXXOXXX",
+            "OOOXOOO",
+            "XXXOXXX",
+            "OOOXOOO",
+            "XXXOXXX",
+        ]
+        connect_four.board.cells = self.generate_cells_from_lines(board_str)
+        connect_four.init_board()
+        for y in range(connect_four.size.y):
+            for x in range(connect_four.size.x):
+                assert connect_four.board.cells[y][x] == CellState.EMPTY
 
     def test_put_player_cell(self) -> None:
         connect_four = ConnectFour()
