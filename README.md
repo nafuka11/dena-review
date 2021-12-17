@@ -155,13 +155,13 @@ GitHub Actionsを使い、以下のイベントが発生した場合、testとli
 
 ### UML図
 
-#### クラス図
-
-![Classes](docs/classes.png)
-
 #### パッケージ図
 
 ![Packages](docs/packages.png)
+
+#### クラス図
+
+![Classes](docs/classes.png)
 
 ## ライセンス
 
