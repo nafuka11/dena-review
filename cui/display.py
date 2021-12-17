@@ -1,5 +1,4 @@
-from logic.board import Board
-from logic.cell import CellState
+from logic import CellState, ConnectFour
 
 CELL_CHARACTER = {CellState.PLAYER: "O", CellState.OPPONENT: "X", CellState.EMPTY: "."}
 

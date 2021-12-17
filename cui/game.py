@@ -5,7 +5,7 @@ from cui.display import (
     display_turn_info,
     display_winner_message,
 )
-from logic.connect_four import ConnectFour
+from logic import ConnectFour
 
 
 class CUIGame:

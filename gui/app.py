@@ -1,10 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-from logic.cell import CellState
-from logic.connect_four import ConnectFour
-from logic.const import BOARD_SIZE
-from logic.point import Point
+from logic import CellState, ConnectFour, Point
 
 CELL_SIZE = Point(40, 40)
 HEADER_HEIGHT = 20
