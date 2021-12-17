@@ -44,17 +44,18 @@ class ContainerFrame(ttk.Frame):
         self.game_end = False
         self.is_player_turn = True
         self.turn = 1
-        self.game = ConnectFour()
 
     def reset_game(self) -> None:
         self.init_game()
+        self.reset_game_board()
         self.redraw_header()
         self.redraw_board()
         self.master.update()
 
+    def reset_game_board(self) -> None:
+        self.game.init_board()
+
     def create_widgets(self) -> None:
-        self.master.columnconfigure(0, weight=1)
-        self.master.rowconfigure(0, weight=1)
         self.grid(column=0, row=0, sticky=tk.N + tk.S + tk.W + tk.E)
         self.create_header()
         self.create_board()

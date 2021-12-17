@@ -1,6 +1,5 @@
 from typing import List
 
-from logic import const
 from logic.board import Board
 from logic.cell import CellState
 from logic.const import BOARD_SIZE, CONNECT_LENGTH
@@ -13,8 +12,10 @@ class ConnectFour:
     ) -> None:
         self.size = size
         self.connect_length = connect_length
-        self.board = Board(self.size, self.connect_length)
+        self.init_board()
 
+    def init_board(self) -> None:
+        self.board = Board(self.size, self.connect_length)
 
     def put_player_cell(self, x: int) -> Point:
         return self.board.put_cell(x, CellState.PLAYER)
